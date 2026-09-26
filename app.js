@@ -793,7 +793,7 @@ function productCard(product) {
         ${optionsMarkup}
         <div class="price-row" style="margin-top: 10px;">
           <div class="price-info" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-            <span class="price-val" style="color: #e11d48; font-weight: 700; font-size: 16px;">${formatMoney(currentOpt.price)}</span>
+            <span class="price-val" style="color: #e11d48; font-weight: 700; font-size: 16px;">${product.category === "creditcards" ? `$${product.price.toFixed(2)}` : formatMoney(currentOpt.price)}</span>
           </div>
           <span class="stock" style="color: ${isOutOfStock ? '#ef4444' : '#16a34a'}; font-weight: 700;">${product.stock ? "In stock" : "Sold out"}</span>
         </div>
@@ -2288,11 +2288,11 @@ function creditCardProductCard(product) {
 
         <div class="credit-card-price-row" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
           <div style="display: flex; align-items: center; gap: 6px;">
-            <span class="card-orig-price-crossed">$${origPriceUsd.toFixed(2)} (${formatMoney(origPriceInr)})</span>
+            <span class="card-orig-price-crossed">$${origPriceUsd.toFixed(2)}</span>
             <span style="background: #10b981; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">80% OFF</span>
           </div>
           <span class="credit-card-price discounted" style="font-size: 16px; font-weight: 800; color: #e11d48;">
-            $${product.price.toFixed(2)} (${formatMoney(inrPrice)})
+            $${product.price.toFixed(2)}
           </span>
         </div>
         <button class="credit-card-btn" onclick="showCreditCardDetail(${product.id})" style="${isOutOfStock ? 'background: #64748b; color: #fff; cursor: pointer;' : ''}">
@@ -2348,8 +2348,8 @@ function renderCreditCardDetail() {
 
   const displayPriceText = isCreditCard
     ? `<div style="display:flex; flex-direction:column; gap: 2px;">
-        <span style="font-size: 14px; text-decoration: line-through; color: #94a3b8; font-weight: 500;">Original: $${origPriceUsd.toFixed(2)} (${formatMoney(origPriceInr)})</span>
-        <span style="color: #e11d48; font-weight: 800; font-size: 22px;">$${product.price.toFixed(2)} (${formatMoney(inrPrice)}) <span style="background: #10b981; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">80% OFF</span></span>
+        <span style="font-size: 14px; text-decoration: line-through; color: #94a3b8; font-weight: 500;">Original: $${origPriceUsd.toFixed(2)}</span>
+        <span style="color: #e11d48; font-weight: 800; font-size: 22px;">$${product.price.toFixed(2)} <span style="background: #10b981; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">80% OFF</span></span>
        </div>`
     : `<div style="display:flex; flex-direction:column; gap: 2px;">
         <span style="color: #e11d48; font-weight: 800; font-size: 22px;">${formatMoney(currentOpt.price)} <span style="background: #dc2626; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">SAVE ₹${(currentOpt.origPrice || (currentOpt.price + 250)) - currentOpt.price}</span></span>
